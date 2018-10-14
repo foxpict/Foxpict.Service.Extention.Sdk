@@ -115,13 +115,7 @@ namespace Foxpict.Service.Extention.Sdk {
       mLogger.Trace ("INITカットポイントを処理します");
       var ite = container.GetAllInstances<IInitPluginCutpoint> ();
       foreach (var prop in ite) {
-        try {
-          prop.OnInitPlugin (param);
-        } catch (Exception expr) {
-
-          mLogger.Warn (expr, "拡張機能の実行でエラーは発生しました。");
-          mLogger.Debug (expr.StackTrace);
-        }
+        prop.OnInitPlugin (param);
       }
     }
 
@@ -129,11 +123,7 @@ namespace Foxpict.Service.Extention.Sdk {
       mLogger.Trace ("STARTカットポイントを処理します");
       var ite = container.GetAllInstances<IStartCutpoint> ();
       foreach (var prop in ite) {
-        try {
-          prop.Process (param);
-        } catch (Exception expr) {
-          mLogger.Warn (expr, "拡張機能の実行でエラーは発生しました。");
-        }
+        prop.Process (param);
       }
     }
 
@@ -141,12 +131,7 @@ namespace Foxpict.Service.Extention.Sdk {
       mLogger.Trace ("API_GET_CATEGORYカットポイントを処理します");
       var ite = container.GetAllInstances<ICategoryApiCutpoint> ();
       foreach (var prop in ite.Select (p => (ICategoryApiCutpoint) p)) {
-
-        try {
-          prop.OnGetCategory ((ICategory) param);
-        } catch (Exception expr) {
-          mLogger.Warn (expr, "拡張機能の実行でエラーは発生しました。");
-        }
+        prop.OnGetCategory ((ICategory) param);
       }
     }
 
